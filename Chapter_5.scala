@@ -53,3 +53,58 @@ class Midnight(var hrs:Int, var min:Int){
 import scala.beans.BeanProperty
 
 class Student(@BeanProperty var name: String, @BeanProperty var id: Long)
+
+
+// Exercise 6
+class Person(private var privateAge: Int) {
+  if (privateAge < 0) {privateAge = 0}
+
+  // Make private and rename
+  def age = privateAge
+
+  def age_=(newValue: Int) {
+    if (newValue > privateAge) privateAge = newValue; // Can’t get younger }
+  }
+}
+
+
+// Exercise 7
+class Person2(val name: String) {
+  val splitted = name.split(" ")
+
+  def firstName = splitted.head
+  def lastName = splitted.last
+}
+
+
+// Exercise 8
+// Note: Could do this with all four as inputs to class, but I wanted to make it flexible enough to handle adding License Plate
+// without adding a Model Year (slightly changes question, though, since then modelYear needs to have both get/set)
+class Car(val manufacturer: String, val model: String) {
+  var modelYear: Int = -1
+  var licensePlate: String = ""
+
+  def this(manufacturer: String, model: String, modelYear: Int){
+    this(manufacturer, model)
+    this.modelYear = modelYear
+  }
+
+
+  def this(manufacturer: String, model: String, licensePlate: String){
+    this(manufacturer, model)
+    this.licensePlate = licensePlate
+  }
+
+  def this(manufacturer: String, model: String, modelYear: Int, licensePlate: String){
+    this(manufacturer, model)
+    this.modelYear = modelYear
+    this.licensePlate = licensePlate
+  }
+}
+
+
+// Exercise 10
+class Employee(val name: String = "John Q. Public", var salary: Double = 0.0){
+  override def toString = "Employee: %s, Salary: %f".format(name, salary)
+}
+// Answer = this is cleaner and more flexible, in my opinion, as it allows user to enter name, but not salary
